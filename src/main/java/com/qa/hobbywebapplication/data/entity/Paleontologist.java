@@ -63,6 +63,16 @@ public class Paleontologist {
 		this.dinosaurs = new ArrayList<>();
 	}
 	
+	public Paleontologist(String forename, String surname, String username, String emailAddress, String institution, String specialism) {
+		super();
+		this.forename = forename;
+		this.surname = surname;
+		this.emailAddress = emailAddress;
+		this.institution = institution;
+		this.specialism = specialism;
+		this.dinosaurs = new ArrayList<>();
+	}
+	
 	public Paleontologist(int id, String forename, String surname, String username, String emailAddress, String institution, String specialism) {
 		super();
 		this.id = id;
