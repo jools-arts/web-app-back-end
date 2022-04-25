@@ -53,7 +53,21 @@ public class Dinosaur {
 	@JoinColumn(name = "paleontologist_id", referencedColumnName = "id")
 	private Paleontologist paleontologist;
 	
+	public Dinosaur() {
+		super();
+	}
+	
+	public Dinosaur(String species, String period, String diet, String habitat, String region) {
+		super();
+		this.species = species;
+		this.period = period;
+		this.diet = diet;
+		this.habitat = habitat;
+		this.region = region;
+	}
+	
 	public Dinosaur(int id, String species, String period, String diet, String habitat, String region) {
+		super();
 		this.id = id;
 		this.species = species;
 		this.period = period;
