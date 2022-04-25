@@ -27,32 +27,32 @@ public class Paleontologist {
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid forename")
+	@Size(min = 1, max = 50, message = "Please enter a valid value for forename")
 	private String forename;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid surname")
+	@Size(min = 1, max = 50, message = "Please enter a valid value for surname")
 	private String surname;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid uesrname")
+	@Size(min = 1, max = 50, message = "Please enter a valid value for uesrname")
 	private String username;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid email address")
+	@Size(min = 1, max = 50, message = "Please enter a valid valur for email address")
 	private String emailAddress;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid institution")
+	@Size(min = 1, max = 50, message = "Please enter a valid value for institution")
 	private String institution;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 1, max = 50, message = "Please enter a valid specialism")
+	@Size(min = 1, max = 50, message = "Please enter a valid value for specialism")
 	private String specialism;
 	
 	@OneToMany(mappedBy = "paleontologist", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
