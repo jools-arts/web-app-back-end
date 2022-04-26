@@ -157,5 +157,4 @@ public class Dinosaur {
 				&& Objects.equals(region, other.region) && Objects.equals(species, other.species);
 	}
 	
-	
 }
