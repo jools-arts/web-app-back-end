@@ -20,9 +20,9 @@ import javax.validation.constraints.Size;
 public class Dinosaur {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "dinosaur_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int dinosaurId;
 	
 	@NotNull
 	@NotBlank
@@ -66,9 +66,9 @@ public class Dinosaur {
 		this.region = region;
 	}
 	
-	public Dinosaur(int id, String species, String period, String diet, String habitat, String region) {
+	public Dinosaur(int dinosaurId, String species, String period, String diet, String habitat, String region) {
 		super();
-		this.id = id;
+		this.dinosaurId = dinosaurId;
 		this.species = species;
 		this.period = period;
 		this.diet = diet;
@@ -77,11 +77,11 @@ public class Dinosaur {
 	}
 
 	public int getId() {
-		return id;
+		return dinosaurId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int dinosaurId) {
+		this.dinosaurId = dinosaurId;
 	}
 
 	public String getSpecies() {
@@ -134,13 +134,13 @@ public class Dinosaur {
 
 	@Override
 	public String toString() {
-		return "Dinosaur [id=" + id + ", species=" + species + ", period=" + period + ", diet=" + diet + ", habitat="
+		return "Dinosaur [dinosaurId=" + dinosaurId + ", species=" + species + ", period=" + period + ", diet=" + diet + ", habitat="
 				+ habitat + ", region=" + region + ", paleontologist=" + paleontologist + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(diet, habitat, id, paleontologist, period, region, species);
+		return Objects.hash(diet, habitat, dinosaurId, paleontologist, period, region, species);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class Dinosaur {
 		if (getClass() != obj.getClass())
 			return false;
 		Dinosaur other = (Dinosaur) obj;
-		return Objects.equals(diet, other.diet) && Objects.equals(habitat, other.habitat) && id == other.id
+		return Objects.equals(diet, other.diet) && Objects.equals(habitat, other.habitat) && dinosaurId == other.dinosaurId
 				&& Objects.equals(paleontologist, other.paleontologist) && Objects.equals(period, other.period)
 				&& Objects.equals(region, other.region) && Objects.equals(species, other.species);
 	}

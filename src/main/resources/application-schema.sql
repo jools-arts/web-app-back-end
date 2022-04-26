@@ -1,27 +1,39 @@
 USE hobby_web_application;
 
-DROP TABLE IF EXISTS `hobby_web_application`.`paleotologist`;
 DROP TABLE IF EXISTS `hobby_web_application`.`dinosaur`;
-
-CREATE TABLE `paleontologist` (
-	`id` INTEGER NOT NULL AUTO_INCREMENT, 
-	`email_address` VARCHAR(50) NOT NULL, 
-	`forename` VARCHAR(50) NOT NULL, 
-	`institution` VARCHAR(50) NOT NULL, 
-	`specialism` VARCHAR(50) NOT NULL, 
-	`surname` VARCHAR(50) NOT NULL, 
-	`username` VARCHAR(50) NOT NULL, 
-	PRIMARY KEY (id)
-);
+DROP TABLE IF EXISTS `hobby_web_applicatoin`.`fossil_site`;
+DROP TABLE IF EXISTS `hobby_web_application`.`paleotologist`;
 
 CREATE TABLE `hobby_web_application`.`dinosaur` (
-	`id` integer not null auto_increment, 
-    `diet` varchar(50) not null, 
-    `habitat` varchar(50) not null, 
-    `period` varchar(50) not null, 
-    `region` varchar(50) not null, 
-    `species` varchar(50) not null, paleontologist_id integer, 
-    PRIMARY KEY (id)
+	`dinosaur_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `species` VARCHAR(50) NOT NULL,
+    `diet` VARCHAR(50) NOT NULL, 
+    `habitat` VARCHAR(50) NOT NULL,
+    `region` VARCHAR(50) NOT NULL, 
+    `period` VARCHAR(50) NOT NULL, 
+    PRIMARY KEY (`dinosaur_id`)
 );
 
-alter table dinosaur add constraint FKmfg8s4d7dqtrtm6hqop4cflsq foreign key (paleontologist_id) references paleontologist (id)
+CREATE TABLE `hobby_web_application`.`fossil_site` (
+	`fossil_site_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `dinosaur_id` INTEGER,
+    `name` VARCHAR(50) NOT NULL,
+    `city` VARCHAR(50) NOT NULL,
+	`country` VARCHAR(50) NOT NULL,
+    `continent` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`fossil_site_id`),
+    FOREIGN KEY (`dinosaur_id`) REFERENCES `dinosaur` (`dinosaur_id`) ON DELETE SET NULL
+);
+
+CREATE TABLE `hobby_web_application`.`paleontologist` (
+	`paleontologist_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `fossil_site_id` INTEGER,
+    `forename` VARCHAR(50) NOT NULL,
+    `surname` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL, 
+	`email_address` VARCHAR(50) NOT NULL,
+    `specialism` VARCHAR(50) NOT NULL,
+    `institution` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`paleontologist_id`),
+    FOREIGN KEY (`fossil_site_id`) REFERENCES `fossil_site` (`fossil_site_id`) ON DELETE SET NULL
+);
