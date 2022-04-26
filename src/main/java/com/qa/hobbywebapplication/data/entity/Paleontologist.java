@@ -175,7 +175,4 @@ public class Paleontologist {
 				&& Objects.equals(surname, other.surname) && Objects.equals(username, other.username);
 	}
 	
-	
-	
-	
 }

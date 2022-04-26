@@ -50,7 +50,7 @@ public class Dinosaur {
 	private String region;
 	
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "paleontologist_id", referencedColumnName = "id")
+	@JoinColumn(name = "paleontologist_id", referencedColumnName = "paleontologist_id")
 	private Paleontologist paleontologist;
 	
 	public Dinosaur() {
