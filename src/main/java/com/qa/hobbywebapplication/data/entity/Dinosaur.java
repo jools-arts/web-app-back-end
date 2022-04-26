@@ -76,11 +76,11 @@ public class Dinosaur {
 		this.region = region;
 	}
 
-	public int getId() {
+	public int getDinosaurId() {
 		return dinosaurId;
 	}
 
-	public void setId(int dinosaurId) {
+	public void setDinosaurId(int dinosaurId) {
 		this.dinosaurId = dinosaurId;
 	}
 

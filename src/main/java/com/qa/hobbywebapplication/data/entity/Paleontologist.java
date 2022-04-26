@@ -21,9 +21,9 @@ import javax.validation.constraints.Size;
 public class Paleontologist {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "paleontologist_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int paleontologistId;
 	
 	@NotNull
 	@NotBlank
@@ -73,9 +73,9 @@ public class Paleontologist {
 		this.dinosaurs = new ArrayList<>();
 	}
 	
-	public Paleontologist(int id, String forename, String surname, String username, String emailAddress, String institution, String specialism) {
+	public Paleontologist(int paleontologistId, String forename, String surname, String username, String emailAddress, String institution, String specialism) {
 		super();
-		this.id = id;
+		this.paleontologistId = paleontologistId;
 		this.forename = forename;
 		this.surname = surname;
 		this.emailAddress = emailAddress;
@@ -84,12 +84,12 @@ public class Paleontologist {
 		this.dinosaurs = new ArrayList<>();
 	}
 
-	public int getId() {
-		return id;
+	public int getPaleontologistId() {
+		return paleontologistId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPaleontologistId(int paleontologistId) {
+		this.paleontologistId = paleontologistId;
 	}
 
 	public String getForename() {
@@ -150,14 +150,14 @@ public class Paleontologist {
 
 	@Override
 	public String toString() {
-		return "Paleontologist [id=" + id + ", forename=" + forename + ", surname=" + surname + ", username=" + username
+		return "Paleontologist [paleontologistId=" + paleontologistId + ", forename=" + forename + ", surname=" + surname + ", username=" + username
 				+ ", emailAddress=" + emailAddress + ", institution=" + institution + ", specialism=" + specialism
 				+ ", dinosaurs=" + dinosaurs + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dinosaurs, emailAddress, forename, id, institution, specialism, surname, username);
+		return Objects.hash(dinosaurs, emailAddress, forename, paleontologistId, institution, specialism, surname, username);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class Paleontologist {
 			return false;
 		Paleontologist other = (Paleontologist) obj;
 		return Objects.equals(dinosaurs, other.dinosaurs) && Objects.equals(emailAddress, other.emailAddress)
-				&& Objects.equals(forename, other.forename) && id == other.id
+				&& Objects.equals(forename, other.forename) && paleontologistId == other.paleontologistId
 				&& Objects.equals(institution, other.institution) && Objects.equals(specialism, other.specialism)
 				&& Objects.equals(surname, other.surname) && Objects.equals(username, other.username);
 	}
