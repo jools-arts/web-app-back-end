@@ -2,6 +2,9 @@ package com.qa.hobbywebapplication.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ public class PaleontologistService {
 	
 	private PaleontologistRepository paleontologistRepository;
 	private FossilSiteService fossilSiteService;
-	private ModelMapper modelmapper;
+	private ModelMapper modelMapper;
 	
 	@Autowired
 	public PaleontologistService(PaleontologistRepository paleontologistRepository, FossilSiteService fossilSiteService, ModelMapper modelMapper) {
@@ -36,7 +39,23 @@ public class PaleontologistService {
 		return paleontologistDTOs;
 	}
 	
-	private PaleontologistDTO toDTO(Paleontologist paleontologist) {
-		return this.modelmapper.map(paleontologist, PaleontologistDTO.class);
+	public PaleontologistDTO getPaleontologist(int paleontologistId) {
+		Optional<Paleontologist> paleontologist = paleontologistRepository.findById(paleontologistId);
+		
+		if (paleontologist.isPresent()) {
+			return this.toDTO(paleontologist.get());
+		}
+		throw new EntityNotFoundException("The paleontologist you requested was not found");
 	}
+	
+	public PaleontologistDTO createPaleontologist(NewPaleontologistDTO paleontologist) {
+		Paleontologist toSave = this.modelMapper.map(paleontologist, Paleontologist.class);
+		Paleontologist newPaleontologist = paleontologistRepository.save(toSave);
+		return this.toDTO(newPaleontologist);
+	}
+	
+	private PaleontologistDTO toDTO(Paleontologist paleontologist) {
+		return this.modelMapper.map(paleontologist, PaleontologistDTO.class);
+	}
+	
 }
