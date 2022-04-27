@@ -2,8 +2,6 @@ package com.qa.hobbywebapplication.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
@@ -19,14 +17,12 @@ import com.qa.hobbywebapplication.dto.PaleontologistDTO;
 public class PaleontologistService {
 	
 	private PaleontologistRepository paleontologistRepository;
-	private FossilSiteService fossilSiteService;
 	private ModelMapper modelMapper;
 	
 	@Autowired
 	public PaleontologistService(PaleontologistRepository paleontologistRepository, FossilSiteService fossilSiteService, ModelMapper modelMapper) {
 		super();
 		this.paleontologistRepository = paleontologistRepository;
-		this.fossilSiteService = fossilSiteService;
 		this.modelMapper = modelMapper;
 	}
 	
@@ -41,12 +37,11 @@ public class PaleontologistService {
 	}
 	
 	public PaleontologistDTO getPaleontologist(int paleontologistId) {
-		Optional<Paleontologist> paleontologist = paleontologistRepository.findById(paleontologistId);
-		
-		if (paleontologist.isPresent()) {
-			return this.toDTO(paleontologist.get());
+		if (paleontologistRepository.existsById(paleontologistId)) {
+			Paleontologist savedPaleontologist = paleontologistRepository.getById(paleontologistId);
+			return this.toDTO(savedPaleontologist);
 		}
-		throw new EntityNotFoundException("The paleontologist you requested to retrieve was not found");
+		throw new EntityNotFoundException("The paleontologist you requested for retrieval was not found");
 	}
 	
 	public PaleontologistDTO createPaleontologist(NewPaleontologistDTO paleontologist) {
@@ -66,7 +61,15 @@ public class PaleontologistService {
 			savedPaleontologist.setSpecialism(paleontologist.getSpecialism());
 			return this.toDTO(savedPaleontologist);
 		}
-		throw new EntityNotFoundException("The paleontologist you requested to update was not found");
+		throw new EntityNotFoundException("The paleontologist you requested for updation was not found");
+	}
+	
+	public void deleteUser(int PaleontologistId) {
+		if (paleontologistRepository.existsById(PaleontologistId)) {
+			paleontologistRepository.deleteById(PaleontologistId);
+			return;
+		}
+		throw new EntityNotFoundException("The paleontologist you requested for deletion was not found");
 	}
 	
 	private PaleontologistDTO toDTO(Paleontologist paleontologist) {
