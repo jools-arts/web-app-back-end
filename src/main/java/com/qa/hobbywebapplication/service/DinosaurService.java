@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.qa.hobbywebapplication.data.entity.Dinosaur;
 import com.qa.hobbywebapplication.data.repository.DinosaurRepository;
 import com.qa.hobbywebapplication.dto.DinosaurDTO;
+import com.qa.hobbywebapplication.dto.NewDinosaurDTO;
 
 @Service
 public class DinosaurService {
@@ -47,6 +48,28 @@ public class DinosaurService {
 	public DinosaurDTO createDinosaur(NewDinosaurDTO dinosaur) {
 		Dinosaur toSave = this.modelMapper.map(dinosaur, Dinosaur.class);
 		Dinosaur newDinosaur = dinosaurRepository.save(toSave);
+		return this.toDTO(newDinosaur);
+	}
+	
+	public DinosaurDTO updateDinosaur(NewDinosaurDTO dinosaur, int dinosaurId) {
+		if (dinosaurRepository.existsById(dinosaurId)) {
+			Dinosaur savedDinosaur = dinosaurRepository.getById(dinosaurId);
+			savedDinosaur.setSpecies(dinosaur.getSpecies());
+			savedDinosaur.setPeriod(dinosaur.getPeriod());
+			savedDinosaur.setDiet(dinosaur.getDiet());
+			savedDinosaur.setHabitat(dinosaur.getHabitat());
+			savedDinosaur.setRegion(dinosaur.getRegion());
+			return this.toDTO(savedDinosaur);
+		}
+		throw new EntityNotFoundException("The dinosaur you requested for updation was not found");
+	}
+	
+	public void deleteDinosaur(int DinosaurId) {
+		if (dinosaurRepository.existsById(DinosaurId)) {
+			dinosaurRepository.existsById(DinosaurId);
+			return;
+		}
+		throw new EntityNotFoundException("The dinosaur you requested for deletion was not found");
 	}
 	
 	private DinosaurDTO toDTO(Dinosaur dinosaur) {
