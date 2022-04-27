@@ -20,7 +20,7 @@ public class PaleontologistService {
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	public PaleontologistService(PaleontologistRepository paleontologistRepository, FossilSiteService fossilSiteService, ModelMapper modelMapper) {
+	public PaleontologistService(PaleontologistRepository paleontologistRepository, ModelMapper modelMapper) {
 		super();
 		this.paleontologistRepository = paleontologistRepository;
 		this.modelMapper = modelMapper;
