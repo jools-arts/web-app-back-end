@@ -37,7 +37,7 @@ public class FossilSiteService {
 		return fossilSiteDTOs;
 	}
 	
-	public FossilSiteDTO getFossiSite(int fossilSiteId) {
+	public FossilSiteDTO getFossilSite(int fossilSiteId) {
 		if (fossilSiteRepository.existsById(fossilSiteId)) {
 			FossilSite savedFossilSite = fossilSiteRepository.getById(fossilSiteId);
 			return this.toDTO(savedFossilSite);
@@ -51,7 +51,7 @@ public class FossilSiteService {
 		return this.toDTO(newFossilSite);
 	}
 	
-	public FossilSiteDTO updateFossilSite(FossilSiteDTO fossilSite, int fossilSiteId) {
+	public FossilSiteDTO updateFossilSite(NewFossilSiteDTO fossilSite, int fossilSiteId) {
 		if (fossilSiteRepository.existsById(fossilSiteId)) {
 			FossilSite savedFossilSite = fossilSiteRepository.getById(fossilSiteId);
 			savedFossilSite.setName(fossilSite.getName());
@@ -63,7 +63,7 @@ public class FossilSiteService {
 		throw new EntityNotFoundException("The fossil site you requested for updation was not found");
 	}
 	
-	public void deleteUser(int fossilSiteId) {
+	public void deleteFossilSite(int fossilSiteId) {
 		if (fossilSiteRepository.existsById(fossilSiteId)) {
 			fossilSiteRepository.existsById(fossilSiteId);
 			return;
