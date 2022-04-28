@@ -56,11 +56,11 @@ public class Paleontologist {
 	private String specialism;
 	
 	@OneToMany(mappedBy = "paleontologist", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
-	private List<Dinosaur> dinosaurs;
+	private List<FossilSite> fossilSites;
 	
 	public Paleontologist() {
 		super();
-		this.dinosaurs = new ArrayList<>();
+		this.fossilSites = new ArrayList<>();
 	}
 	
 	public Paleontologist(String forename, String surname, String username, String emailAddress, String institution, String specialism) {
@@ -70,7 +70,7 @@ public class Paleontologist {
 		this.emailAddress = emailAddress;
 		this.institution = institution;
 		this.specialism = specialism;
-		this.dinosaurs = new ArrayList<>();
+		this.fossilSites = new ArrayList<>();
 	}
 	
 	public Paleontologist(int paleontologistId, String forename, String surname, String username, String emailAddress, String institution, String specialism) {
@@ -81,7 +81,7 @@ public class Paleontologist {
 		this.emailAddress = emailAddress;
 		this.institution = institution;
 		this.specialism = specialism;
-		this.dinosaurs = new ArrayList<>();
+		this.fossilSites = new ArrayList<>();
 	}
 
 	public int getPaleontologistId() {
@@ -140,24 +140,25 @@ public class Paleontologist {
 		this.specialism = specialism;
 	}
 
-	public List<Dinosaur> getDinosaurs() {
-		return dinosaurs;
+	public List<FossilSite> getFossilSites() {
+		return fossilSites;
 	}
 
-	public void setDinosaurs(List<Dinosaur> dinosaurs) {
-		this.dinosaurs = dinosaurs;
+	public void setFossilSites(List<FossilSite> fossilSites) {
+		this.fossilSites = fossilSites;
 	}
 
 	@Override
 	public String toString() {
-		return "Paleontologist [paleontologistId=" + paleontologistId + ", forename=" + forename + ", surname=" + surname + ", username=" + username
-				+ ", emailAddress=" + emailAddress + ", institution=" + institution + ", specialism=" + specialism
-				+ ", dinosaurs=" + dinosaurs + "]";
+		return "Paleontologist [paleontologistId=" + paleontologistId + ", forename=" + forename + ", surname="
+				+ surname + ", username=" + username + ", emailAddress=" + emailAddress + ", institution=" + institution
+				+ ", specialism=" + specialism + ", fossilSites=" + fossilSites + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dinosaurs, emailAddress, forename, paleontologistId, institution, specialism, surname, username);
+		return Objects.hash(emailAddress, forename, fossilSites, institution, paleontologistId, specialism, surname,
+				username);
 	}
 
 	@Override
@@ -169,9 +170,9 @@ public class Paleontologist {
 		if (getClass() != obj.getClass())
 			return false;
 		Paleontologist other = (Paleontologist) obj;
-		return Objects.equals(dinosaurs, other.dinosaurs) && Objects.equals(emailAddress, other.emailAddress)
-				&& Objects.equals(forename, other.forename) && paleontologistId == other.paleontologistId
-				&& Objects.equals(institution, other.institution) && Objects.equals(specialism, other.specialism)
+		return Objects.equals(emailAddress, other.emailAddress) && Objects.equals(forename, other.forename)
+				&& Objects.equals(fossilSites, other.fossilSites) && Objects.equals(institution, other.institution)
+				&& paleontologistId == other.paleontologistId && Objects.equals(specialism, other.specialism)
 				&& Objects.equals(surname, other.surname) && Objects.equals(username, other.username);
 	}
 	
