@@ -46,7 +46,7 @@ public class FossilSiteService {
 	}
 	
 	public List<FossilSiteDTO> getFossilSitesByPaleontologistId(int paleontologistId) {
-		List<FossilSite> fossilSites = fossilSiteRepository.findByPaleontologistId(paleontologistId);
+		List<FossilSite> fossilSites = fossilSiteRepository.findByPaleontologist(paleontologistId);
 		List<FossilSiteDTO> fossilSiteDTOs = new ArrayList<>();
 		
 		for (FossilSite fossilsite: fossilSites) {

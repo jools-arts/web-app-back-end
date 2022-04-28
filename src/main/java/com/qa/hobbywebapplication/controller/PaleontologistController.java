@@ -1,11 +1,11 @@
 package com.qa.hobbywebapplication.controller;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,14 +51,15 @@ public class PaleontologistController {
 		return ResponseEntity.ok(paleontologistService.getPaleontologistFossilSites(paleontologistId));
 	}
 	
-	//@PostMapping
-	//public ResponseEntity<PaleontologistDTO> createPaleotologist(@Valid @RequestBody NewPaleontologistDTO paleontologist) {
-		//PaleontologistDTO newPaleontologist = paleontologistService.createPaleontologist(paleontologist);
+	@PostMapping
+	public ResponseEntity<PaleontologistDTO> createPaleontologist(@Valid @RequestBody NewPaleontologistDTO paleontologist) {
+		PaleontologistDTO newPaleontologist = paleontologistService.createPaleontologist(paleontologist);
 		
-		//HttpHeaders headers = new HttpHeaders(null);
-		//headers.add("Location", "http://localhost:8080/paleontologist/" + newPaleontologist.getPaleontologistId());
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "http://localhost:8080/paleontologist/" + newPaleontologist.getPaleontologistId());
 		
-		//return new ResponseEntity<>(newPaleontologist, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(newPaleontologist, headers, HttpStatus.CREATED);
+	}
 	
 	@PutMapping(path = "/{paleontologist_id}")
 	public ResponseEntity<PaleontologistDTO> updatePaleontologist(@RequestBody NewPaleontologistDTO newPaleontologistDTO, @PathVariable(name = "paleontologist_id") int paleontologistId) {

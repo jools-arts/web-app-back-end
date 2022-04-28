@@ -10,5 +10,5 @@ import com.qa.hobbywebapplication.data.entity.FossilSite;
 @Repository
 public interface FossilSiteRepository extends JpaRepository<FossilSite, Integer> {
 	
-	List<FossilSite> findByPaleontologistId(int paleontologistId);
+	List<FossilSite> findByPaleontologist(int paleontologistId);
 }

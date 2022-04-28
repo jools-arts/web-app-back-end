@@ -49,9 +49,9 @@ public class FossilSite {
 	
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "paleontologist_id", referencedColumnName = "paleontologist_id")
-	private FossilSite fossilsite;
+	private Paleontologist paleontologist;
 	
-	@OneToMany(mappedBy = "user", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "fossilSite", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
 	private List<Dinosaur> dinosaurs;
 	
 	public FossilSite() {
@@ -116,12 +116,12 @@ public class FossilSite {
 		this.continent = continent;
 	}
 
-	public FossilSite getFossilsite() {
-		return fossilsite;
+	public Paleontologist getPaleontologist() {
+		return paleontologist;
 	}
 
-	public void setFossilsite(FossilSite fossilsite) {
-		this.fossilsite = fossilsite;
+	public void setPaleontologist(Paleontologist paleontologist) {
+		this.paleontologist = paleontologist;
 	}
 
 	public List<Dinosaur> getDinosaurs() {
@@ -135,12 +135,12 @@ public class FossilSite {
 	@Override
 	public String toString() {
 		return "FossilSite [fossilSiteId=" + fossilSiteId + ", name=" + name + ", city=" + city + ", country=" + country
-				+ ", continent=" + continent + ", fossilsite=" + fossilsite + ", dinosaurs=" + dinosaurs + "]";
+				+ ", continent=" + continent + ", paleontologist=" + paleontologist + ", dinosaurs=" + dinosaurs + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, continent, country, dinosaurs, fossilSiteId, fossilsite, name);
+		return Objects.hash(city, continent, country, dinosaurs, fossilSiteId, name, paleontologist);
 	}
 
 	@Override
@@ -154,8 +154,8 @@ public class FossilSite {
 		FossilSite other = (FossilSite) obj;
 		return Objects.equals(city, other.city) && Objects.equals(continent, other.continent)
 				&& Objects.equals(country, other.country) && Objects.equals(dinosaurs, other.dinosaurs)
-				&& fossilSiteId == other.fossilSiteId && Objects.equals(fossilsite, other.fossilsite)
-				&& Objects.equals(name, other.name);
+				&& fossilSiteId == other.fossilSiteId && Objects.equals(name, other.name)
+				&& Objects.equals(paleontologist, other.paleontologist);
 	}
 
 }
