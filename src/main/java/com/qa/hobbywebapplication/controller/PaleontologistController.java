@@ -65,4 +65,5 @@ public class PaleontologistController {
 		paleontologistService.deletePaleontologist(paleontologistId);
 		return ResponseEntity.ok(deletedPaleontologist);
 	}
+	
 }
