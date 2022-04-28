@@ -50,8 +50,8 @@ public class Dinosaur {
 	private String region;
 	
 	@ManyToOne(optional = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "paleontologist_id", referencedColumnName = "paleontologist_id")
-	private Paleontologist paleontologist;
+	@JoinColumn(name = "fossil_site_id", referencedColumnName = "fossil_site_id")
+	private FossilSite fossilSite;
 	
 	public Dinosaur() {
 		super();
@@ -124,23 +124,23 @@ public class Dinosaur {
 		this.region = region;
 	}
 
-	public Paleontologist getPaleontologist() {
-		return paleontologist;
+	public FossilSite getFossilSite() {
+		return fossilSite;
 	}
 
-	public void setPaleontologist(Paleontologist paleontologist) {
-		this.paleontologist = paleontologist;
+	public void setFossilSite(FossilSite fossilSite) {
+		this.fossilSite = fossilSite;
 	}
 
 	@Override
 	public String toString() {
-		return "Dinosaur [dinosaurId=" + dinosaurId + ", species=" + species + ", period=" + period + ", diet=" + diet + ", habitat="
-				+ habitat + ", region=" + region + ", paleontologist=" + paleontologist + "]";
+		return "Dinosaur [dinosaurId=" + dinosaurId + ", species=" + species + ", period=" + period + ", diet=" + diet
+				+ ", habitat=" + habitat + ", region=" + region + ", fossilSite=" + fossilSite + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(diet, habitat, dinosaurId, paleontologist, period, region, species);
+		return Objects.hash(diet, dinosaurId, fossilSite, habitat, period, region, species);
 	}
 
 	@Override
@@ -152,9 +152,10 @@ public class Dinosaur {
 		if (getClass() != obj.getClass())
 			return false;
 		Dinosaur other = (Dinosaur) obj;
-		return Objects.equals(diet, other.diet) && Objects.equals(habitat, other.habitat) && dinosaurId == other.dinosaurId
-				&& Objects.equals(paleontologist, other.paleontologist) && Objects.equals(period, other.period)
-				&& Objects.equals(region, other.region) && Objects.equals(species, other.species);
+		return Objects.equals(diet, other.diet) && dinosaurId == other.dinosaurId
+				&& Objects.equals(fossilSite, other.fossilSite) && Objects.equals(habitat, other.habitat)
+				&& Objects.equals(period, other.period) && Objects.equals(region, other.region)
+				&& Objects.equals(species, other.species);
 	}
 	
 }

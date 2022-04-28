@@ -55,7 +55,7 @@ public class Paleontologist {
 	@Size(min = 1, max = 50, message = "Please enter a valid value for specialism")
 	private String specialism;
 	
-	@OneToMany(mappedBy = "paleontologist", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "paleontologist", targetEntity = FossilSite.class, fetch = FetchType.LAZY)
 	private List<FossilSite> fossilSites;
 	
 	public Paleontologist() {

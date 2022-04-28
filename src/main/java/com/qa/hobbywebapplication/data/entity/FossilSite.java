@@ -1,12 +1,18 @@
 package com.qa.hobbywebapplication.data.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -41,8 +47,16 @@ public class FossilSite {
 	@Size(min = 1, max = 50, message = "Please enter a valid value for continent")
 	private String continent;
 	
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "paleontologist_id", referencedColumnName = "paleontologist_id")
+	private FossilSite fossilsite;
+	
+	@OneToMany(mappedBy = "user", targetEntity = Dinosaur.class, fetch = FetchType.LAZY)
+	private List<Dinosaur> dinosaurs;
+	
 	public FossilSite() {
 		super();
+		this.dinosaurs = new ArrayList<>();
 	}
 	
 	public FossilSite(String name, String city, String country, String continent) {
@@ -50,6 +64,7 @@ public class FossilSite {
 		this.city = city;
 		this.country = country;
 		this.continent = continent;
+		this.dinosaurs = new ArrayList<>();
 	}
 	
 	public FossilSite(int fossilSiteId, String name, String city, String country, String continent) {
@@ -58,6 +73,7 @@ public class FossilSite {
 		this.city = city;
 		this.country = country;
 		this.continent = continent;
+		this.dinosaurs = new ArrayList<>();
 	}
 
 	public int getFossilSiteId() {
@@ -100,15 +116,31 @@ public class FossilSite {
 		this.continent = continent;
 	}
 
+	public FossilSite getFossilsite() {
+		return fossilsite;
+	}
+
+	public void setFossilsite(FossilSite fossilsite) {
+		this.fossilsite = fossilsite;
+	}
+
+	public List<Dinosaur> getDinosaurs() {
+		return dinosaurs;
+	}
+
+	public void setDinosaurs(List<Dinosaur> dinosaurs) {
+		this.dinosaurs = dinosaurs;
+	}
+
 	@Override
 	public String toString() {
 		return "FossilSite [fossilSiteId=" + fossilSiteId + ", name=" + name + ", city=" + city + ", country=" + country
-				+ ", continent=" + continent + "]";
+				+ ", continent=" + continent + ", fossilsite=" + fossilsite + ", dinosaurs=" + dinosaurs + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, continent, country, fossilSiteId, name);
+		return Objects.hash(city, continent, country, dinosaurs, fossilSiteId, fossilsite, name);
 	}
 
 	@Override
@@ -121,7 +153,8 @@ public class FossilSite {
 			return false;
 		FossilSite other = (FossilSite) obj;
 		return Objects.equals(city, other.city) && Objects.equals(continent, other.continent)
-				&& Objects.equals(country, other.country) && fossilSiteId == other.fossilSiteId
+				&& Objects.equals(country, other.country) && Objects.equals(dinosaurs, other.dinosaurs)
+				&& fossilSiteId == other.fossilSiteId && Objects.equals(fossilsite, other.fossilsite)
 				&& Objects.equals(name, other.name);
 	}
 
