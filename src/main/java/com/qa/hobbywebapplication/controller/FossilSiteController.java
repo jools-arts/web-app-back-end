@@ -2,13 +2,17 @@ package com.qa.hobbywebapplication.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +43,16 @@ public class FossilSiteController {
 	public ResponseEntity<FossilSiteDTO> getFossilSite(@PathVariable(name = "fossil_site_id") int fossilSiteId) {
 		FossilSiteDTO fossilSite = fossilSiteService.getFossilSite(fossilSiteId);
 		return new ResponseEntity<>(fossilSite, HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<FossilSiteDTO> createFossilSite(@Valid @RequestBody NewFossilSiteDTO fossilSite) {
+		FossilSiteDTO newFossilSite = fossilSiteService.createFossilSite(fossilSite);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", "http://localhost:8080/fossilSite/" + newFossilSite.getFossilSiteId());
+		
+		return new ResponseEntity<>(newFossilSite, headers, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(path = "/{fossil_site_id}")
