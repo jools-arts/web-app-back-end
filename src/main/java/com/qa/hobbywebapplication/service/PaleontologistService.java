@@ -64,7 +64,7 @@ public class PaleontologistService {
 		throw new EntityNotFoundException("The paleontologist you requested for updation was not found");
 	}
 	
-	public void deleteUser(int PaleontologistId) {
+	public void deletePaleontologist(int PaleontologistId) {
 		if (paleontologistRepository.existsById(PaleontologistId)) {
 			paleontologistRepository.deleteById(PaleontologistId);
 			return;
