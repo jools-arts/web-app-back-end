@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.hobbywebapplication.data.entity.Paleontologist;
 import com.qa.hobbywebapplication.data.repository.PaleontologistRepository;
+import com.qa.hobbywebapplication.dto.FossilSiteDTO;
 import com.qa.hobbywebapplication.dto.NewPaleontologistDTO;
 import com.qa.hobbywebapplication.dto.PaleontologistDTO;
 
@@ -17,12 +18,14 @@ import com.qa.hobbywebapplication.dto.PaleontologistDTO;
 public class PaleontologistService {
 	
 	private PaleontologistRepository paleontologistRepository;
+	private FossilSiteService fossilSiteService;
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	public PaleontologistService(PaleontologistRepository paleontologistRepository, ModelMapper modelMapper) {
+	public PaleontologistService(PaleontologistRepository paleontologistRepository, FossilSiteService fossilSiteService, ModelMapper modelMapper) {
 		super();
 		this.paleontologistRepository = paleontologistRepository;
+		this.fossilSiteService = fossilSiteService;
 		this.modelMapper = modelMapper;
 	}
 	
@@ -42,6 +45,13 @@ public class PaleontologistService {
 			return this.toDTO(savedPaleontologist);
 		}
 		throw new EntityNotFoundException("The paleontologist you requested for retrieval was not found");
+	}
+	
+	public List<FossilSiteDTO> getPaleontologistFossilSites(int paleontologistId) {
+		PaleontologistDTO paleontologist = this.getPaleontologist(paleontologistId);
+		List<FossilSiteDTO> fossilSites = fossilSiteService.getFossilSitesByPaleontologistId(paleontologistId);
+		fossilSites.forEach(fossilSite -> fossilSite.setPaleontologistDTO(paleontologist));
+		return fossilSites;
 	}
 	
 	public PaleontologistDTO createPaleontologist(NewPaleontologistDTO paleontologist) {

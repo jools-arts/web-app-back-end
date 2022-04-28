@@ -32,16 +32,19 @@ public class FossilSiteDTO {
 	@Size(min = 1, max = 50, message = "Please enter a valid value for continent")
 	private String continent;
 	
+	private PaleontologistDTO paleontologistDTO;
+	
 	public FossilSiteDTO() {
 		super();
 	}
 	
-	public FossilSiteDTO(int fossilSiteId, String name, String city, String country, String continent) {
+	public FossilSiteDTO(int fossilSiteId, String name, String city, String country, String continent, PaleontologistDTO paleontologistDTO) {
 		this.fossilSiteId = fossilSiteId;
 		this.name = name;
 		this.city = city;
 		this.country = country;
 		this.continent = continent;
+		this.paleontologistDTO = paleontologistDTO;
 	}
 
 	public int getFossilSiteId() {
@@ -84,15 +87,23 @@ public class FossilSiteDTO {
 		this.continent = continent;
 	}
 
+	public PaleontologistDTO getPaleontologistDTO() {
+		return paleontologistDTO;
+	}
+
+	public void setPaleontologistDTO(PaleontologistDTO paleontologistDTO) {
+		this.paleontologistDTO = paleontologistDTO;
+	}
+
 	@Override
 	public String toString() {
 		return "FossilSiteDTO [fossilSiteId=" + fossilSiteId + ", name=" + name + ", city=" + city + ", country="
-				+ country + ", continent=" + continent + "]";
+				+ country + ", continent=" + continent + ", paleontologistDTO=" + paleontologistDTO + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, continent, country, fossilSiteId, name);
+		return Objects.hash(city, continent, country, fossilSiteId, name, paleontologistDTO);
 	}
 
 	@Override
@@ -106,7 +117,7 @@ public class FossilSiteDTO {
 		FossilSiteDTO other = (FossilSiteDTO) obj;
 		return Objects.equals(city, other.city) && Objects.equals(continent, other.continent)
 				&& Objects.equals(country, other.country) && fossilSiteId == other.fossilSiteId
-				&& Objects.equals(name, other.name);
+				&& Objects.equals(name, other.name) && Objects.equals(paleontologistDTO, other.paleontologistDTO);
 	}
 
 }

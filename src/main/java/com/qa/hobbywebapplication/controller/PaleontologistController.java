@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qa.hobbywebapplication.dto.FossilSiteDTO;
 import com.qa.hobbywebapplication.dto.NewPaleontologistDTO;
 import com.qa.hobbywebapplication.dto.PaleontologistDTO;
 import com.qa.hobbywebapplication.service.PaleontologistService;
@@ -43,6 +44,11 @@ public class PaleontologistController {
 	public ResponseEntity<PaleontologistDTO> getPaleontologist(@PathVariable(name = "paleontologist_id") int paleontologistId) {
 		PaleontologistDTO paleontologist = paleontologistService.getPaleontologist(paleontologistId);
 		return new ResponseEntity<>(paleontologist, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/{paleontologist_id}/fossil_sites")
+	public ResponseEntity<List<FossilSiteDTO>> getPaleontologistFossilSites(@PathVariable(name = "paleontologist_id") int paleontologistId) {
+		return ResponseEntity.ok(paleontologistService.getPaleontologistFossilSites(paleontologistId));
 	}
 	
 	//@PostMapping

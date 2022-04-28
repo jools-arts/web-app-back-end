@@ -45,6 +45,16 @@ public class FossilSiteService {
 		throw new EntityNotFoundException("The fossil site you requested for retrieval was not found");
 	}
 	
+	public List<FossilSiteDTO> getFossilSitesByPaleontologistId(int paleontologistId) {
+		List<FossilSite> fossilSites = fossilSiteRepository.findByPaleontologistId(paleontologistId);
+		List<FossilSiteDTO> fossilSiteDTOs = new ArrayList<>();
+		
+		for (FossilSite fossilsite: fossilSites) {
+			fossilSiteDTOs.add(this.toDTO(fossilsite));
+		}
+		return fossilSiteDTOs;
+	}
+	
 	public FossilSiteDTO createFossilSite(NewFossilSiteDTO fossilSite) {
 		FossilSite toSave = this.modelMapper.map(fossilSite,  FossilSite.class);
 		FossilSite newFossilSite = fossilSiteRepository.save(toSave);
