@@ -7,7 +7,7 @@ The purpose of this Spring Boot API back-end is to provide CRUD (create, read, u
 
 I developed this project because I wanted to streamline the process of recording, documenting, and sharing dinosaur fossil discoveries between peers and colleagues alike.
 
-It addresses the problem of having to manually record dinsaur fossil discoveries by hand, as paleontologists the world over can now upload their findings directly to the Triassic Park Web Application.
+It addresses the problem of having to manually record dinsaur fossil discoveries by hand, as paleontologists the world over can now upload their findings directly to the Triassic Park web application.
 
 Over the course of this project, I learnt how to use new technologies such as Spring Boot which aid in the efficient development of web applications.
 
